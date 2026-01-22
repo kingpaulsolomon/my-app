@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Registration Form</title>
+    <title>Registration</title>
 
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,42 +11,182 @@
     <link rel="apple-touch-icon" href="icon-192.png">
 
     <style>
+        /* --- GLOBAL STYLES --- */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-            padding: 20px;
-            /* iOS Safe Area handling */
-            padding-top: env(safe-area-inset-top); 
+            background-color: #f0f2f5; /* Light grey background for contrast */
+            color: #333;
+            margin: 0;
+            padding: 0;
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
+        /* --- HEADER BANNER --- */
+        .header {
+            background: linear-gradient(135deg, #007AFF, #00C6FF);
+            height: 200px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding-top: env(safe-area-inset-top);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: -40px; /* Pull text up slightly */
         }
 
-        h1 { text-align: center; margin-bottom: 25px; }
+        /* --- THE CARD (The box containing the form) --- */
+        .container {
+            max-width: 500px;
+            margin: -60px auto 20px auto; /* Pulls the card UP into the header */
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
 
+        .card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Soft shadow */
+        }
+
+        /* --- FORM FIELDS --- */
         form { display: flex; flex-direction: column; gap: 15px; }
 
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
         label {
-            font-size: 14px;
-            color: #ccc;
-            margin-bottom: -10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 5px;
             margin-left: 5px;
         }
 
         input, select, textarea {
             padding: 15px;
             border-radius: 12px;
-            border: 1px solid #333;
-            background-color: #2a2a2a;
-            color: white;
+            border: 1px solid #e1e1e1;
+            background-color: #f9f9f9;
+            color: #333;
             font-size: 16px;
             width: 100%;
             box-sizing: border-box;
             outline: none;
+            transition: all 0.2s;
         }
 
-        input:focus, select
+        input:focus, select:focus, textarea:focus {
+            border-color: #007AFF;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(0,122,255,0.1);
+        }
+
+        textarea { resize: vertical; min-height: 80px; }
+
+        /* --- SUBMIT BUTTON --- */
+        button {
+            background-color: #007AFF;
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            margin-top: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,122,255,0.3);
+        }
+        button:active { transform: scale(0.98); background-color: #0056b3; }
+
+        /* --- FOOTER --- */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 12px;
+        }
+        .footer a { color: #007AFF; text-decoration: none; }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Join Our Community</h1>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            
+            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" placeholder="e.g. John Doe" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Age</label>
+                    <input type="number" name="age" placeholder="e.g. 25" min="1" max="120">
+                </div>
+
+                <div class="input-group">
+                    <label>Gender</label>
+                    <select name="gender">
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Address</label>
+                    <textarea name="address" placeholder="Enter your full address"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" name="mobile" placeholder="+91 98765 43210" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="john@example.com" required>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
+
+                <div class="input-group">
+                    <label>Contact Preference</label>
+                    <select id="contactConsent" name="contact_consent" onchange="toggleContactMode()">
+                        <option value="no" selected>Do not contact me</option>
+                        <option value="yes">Yes, contact me</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Preferred Mode</label>
+                    <select id="contactMode" name="contact_mode" disabled style="opacity: 0.6;">
+                        <option value="" disabled selected>Select Mode</option>
+                        <option value="call">Call</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="email">Email</option>
+                        <option value="all">Any Method</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>How did you hear about us
