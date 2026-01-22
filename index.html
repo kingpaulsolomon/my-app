@@ -134,7 +134,7 @@
                 
                 <div class="input-group">
                     <label>Full Name</label>
-                    <input type="text" name="name" placeholder="e.g. John Doe" required>
+                    <input type="text" name="name" placeholder="e.g. Name" required>
                 </div>
 
                 <div class="input-group">
@@ -147,8 +147,7 @@
                     <select name="gender">
                         <option value="" disabled selected>Select Gender</option>
                         <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
+                        <option value="female">Female</option>        
                     </select>
                 </div>
 
@@ -189,5 +188,47 @@
                 </div>
 
                 <div class="input-group">
-                    <label>How did you hear about us
+                    <label>How did you hear about us?</label>
+                    <select name="source">
+                        <option value="" disabled selected>Select Source</option>
+                        <option value="social">Social Media</option>
+                        <option value="friends">Friends & Family</option>
+                        <option value="search">Search Engine</option>
+                    </select>
+                </div>
+
+                <button type="submit">Submit Application</button>
+            </form>
+
+        </div>
+
+        <div class="footer">
+            <p>© 2026 Your Company Name</p>
+            <p><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></p>
+        </div>
+    </div>
+
+    <script>
+        function toggleContactMode() {
+            var consent = document.getElementById("contactConsent").value;
+            var mode = document.getElementById("contactMode");
+
+            if (consent === "yes") {
+                mode.disabled = false;
+                mode.style.opacity = "1";
+            } else {
+                mode.disabled = true;
+                mode.style.opacity = "0.6";
+                mode.value = "";
+            }
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+
+</body>
+</html>
+
 
