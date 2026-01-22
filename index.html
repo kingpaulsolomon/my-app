@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>My App</title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="My App">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+            margin: 0;
+            /* Prevent "bounce" scrolling on iOS */
+            overscroll-behavior-y: none;
+        }
+        button {
+            background-color: #007AFF;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 12px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        button:active { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <h1>Hello World!</h1>
+    <p>This app runs on iOS, Android, Windows & Mac.</p>
+    
+    <button onclick="alert('It works!')">Tap Me</button>
+
+    <script>
+        // Register the Service Worker (The engine that makes it installable)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+
+</body>
+</html>
